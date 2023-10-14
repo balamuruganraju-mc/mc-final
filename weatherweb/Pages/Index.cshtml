@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Micro-credential program</h1>
+    <p>Learn about run and deploy multicontainers into Azure kubernetes</a>.</p>
+
+    
+    <table>
+        <thead>
+            Forecast data
+            <tr>
+                <td>@nameof(WeatherForecast.Date)</td>
+                <td>@nameof(WeatherForecast.TemperatureC)</td>
+                <td>@nameof(WeatherForecast.TemperatureF)</td>
+                <td>@nameof(WeatherForecast.Summary)</td>
+            </tr>
+        </thead>
+        @if (Model.WeatherForecast.Any())
+        {
+            foreach (WeatherForecast item in Model.WeatherForecast)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.TemperatureC</td>
+                    <td>@item.TemperatureF</td>
+                    <td>@item.Summary</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">
+                    <p>No forecast data is available</p>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

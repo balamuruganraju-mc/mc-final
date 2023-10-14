@@ -1,0 +1,35 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+table {
+    border: 1px solid black;
+}
+
+thead {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+tr:nth-child(even){
+    background-color: #d6eeee;
+}
+
+td{
+    padding: 5px;
+}
