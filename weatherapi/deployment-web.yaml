@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployments
+Meta:
+  name: weather-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: weather-api
+  template:
+    metadata:
+      name: weatherapi
+      labels:
+        env: prod
+        app: weather-api
+        app.kubernetes.io/name: weather-api
+    spec:
+      containers:
+        - name: weatherapicontainer
+          image: balamuruganraju81/weather-api:v1
+          ports: 
+            - containerPort: 80
+              name: http-web-api
+          resources:
+            requests: 
+              cpu: 100m
+              memory: 100mi
+            limits:
+              cpu: 200m
+              memory: 200mi
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+
+---
+
+apiVersion: v1
+kind: Services
+metadata:
+  name: weatherapiservice  
+spec:
+  selector: 
+    app.kubernetes.io/name: weather-api
+  ports:
+    - name: weather-api-port
+      protocal:  TCP
+      port: 8080
+      targetPort: 80
+  type: loadbalancer
+
+
+
+  
+
