@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherforecast-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: weatherforecast
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: mc-weatherweb
+      labels:
+        env: prod
+        app: weatherforecast
+        app.kubernetes.io/name: weatherforecast
+    spec:
+      containers:
+        - name: weatherforecast
+          #image: mcweathermedia.azurecr.io/weatherweb:v1
+          image: balamuruganraju81/weatherforecast:v2
+          ports: 
+            - containerPort: 80             
+              name: http-web
+          resources:             
+            requests:             
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          env:                         
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: weatherforecast-lb-service  
+spec:
+  selector: 
+    app.kubernetes.io/name: weatherforecast
+  ports:
+    - name: weatherforecast-port      
+      port: 80
+  type: LoadBalancer
+
+
+
+  
+

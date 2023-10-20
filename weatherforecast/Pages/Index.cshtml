@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome MC-Program</h1>
+    <p>Learn about building multicontainers using AKS.</a>.</p>    
+   
+    <table>
+        <thead>
+            Forecast data
+            <tr>
+                <td>@nameof(WeatherForecast.Date)</td>
+                <td>@nameof(WeatherForecast.TemperatureC)</td>
+                <td>@nameof(WeatherForecast.TemperatureF)</td>
+                <td>@nameof(WeatherForecast.Summary)</td>
+            </tr>
+        </thead>
+        
+            @foreach(var item in ViewData["WeatherData"] as IList<WeatherForecast>)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.TemperatureC</td>
+                    <td>@item.TemperatureF</td>
+                    <td>@item.Summary</td>
+                </tr>
+            }        
+    </table>
+</div>
