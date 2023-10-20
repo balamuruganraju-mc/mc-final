@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: weather-api
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
   template:
     metadata:
       name: mc-weatherapi
@@ -43,12 +48,7 @@ spec:
     app.kubernetes.io/name: weather-api
   ports:
     - name: weather-api-port
-      protocol:  TCP
+      protocol: TCP
       port: 8080
       targetPort: 80
   type: LoadBalancer
-
-
-
-  
-
